@@ -1,46 +1,32 @@
-"""
-    Routes Configuration File
-
-    Put Routing rules here
-"""
 from system.core.router import routes
 
-"""
-    This is where you define routes
-    
-    Start by defining the default controller
-    Pylot will look for the index method in the default controller to handle the base route
+routes['default_controller'] = 'Sessions'
 
-    Pylot will also automatically generate routes that resemble: '/controller/method/parameters'
-    For example if you had a products controller with an add method that took one parameter 
-    named id the automatically generated url would be '/products/add/<id>'
-    The automatically generated routes respond to all of the http verbs (GET, POST, PUT, PATCH, DELETE)
-"""
-routes['default_controller'] = 'Welcome'
-"""
-    You can add routes and specify their handlers as follows:
+routes['/register'] = 'Sessions#show_register_page'
 
-    routes['VERB']['/URL/GOES/HERE'] = 'Controller#method'
+routes['/login'] = 'Sessions#show_login_page'
 
-    Note the '#' symbol to specify the controller method to use.
-    Note the preceding slash in the url.
-    Note that the http verb must be specified in ALL CAPS.
-    
-    If the http verb is not provided pylot will assume that you want the 'GET' verb.
+routes['POST']['/login'] = 'Sessions#login'
 
-    You can also use route parameters by using the angled brackets like so:
-    routes['PUT']['/users/<int:id>'] = 'users#update'
+routes['POST']['/register'] = 'Sessions#register'
 
-    Note that the parameter can have a specified type (int, string, float, path). 
-    If the type is not specified it will default to string
+routes["/logout"] = "Sessions#logout"
 
-    Here is an example of the restful routes for users:
+routes['/facebook_success/<email>/<first_name>/<last_name>'] = "Sessions#facebook_login_successed"
 
-    routes['GET']['/users'] = 'users#index'
-    routes['GET']['/users/new'] = 'users#new'
-    routes['POST']['/users'] = 'users#create'
-    routes['GET']['/users/<int:id>'] = 'users#show'
-    routes['GET']['/users/<int:id>/edit' = 'users#edit'
-    routes['PATCH']['/users/<int:id>'] = 'users#update'
-    routes['DELETE']['/users/<int:id>'] = 'users#destroy'
-"""
+routes['POST']['/facebook_register'] = 'Sessions#facebook_register'
+
+routes['/courses'] = 'Sessions#courses'
+
+routes['POST']['/add_courses'] = 'Sessions#add_courses'
+
+routes['/courses_page/<course_name>'] = 'Sessions#get_st_courses'
+
+routes['/studentwall'] = 'Sessions#studentwall'
+
+routes['POST']['/message'] ="Sessions#add_post"
+
+routes['POST']['/delete/<post_id>'] ="Sessions#delete_post"
+
+routes['POST']['/comment/<post_id>'] ="Sessions#add_comment"
+
